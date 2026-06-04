@@ -61,6 +61,63 @@ fadeTargets.forEach(el => observer.observe(el));
 // 히어로 즉시 표시
 document.querySelector('.hero-content')?.classList.add('visible');
 
+// ── 별 반짝임 효과 ──────────────────────────────
+(function initStars() {
+  const canvas = document.getElementById('starCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const COLORS = ['255,255,255', '196,181,253', '147,197,253', '165,243,252', '253,216,253'];
+  let stars = [];
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  function createStar() {
+    return {
+      x:           Math.random() * canvas.width,
+      y:           Math.random() * canvas.height,
+      radius:      Math.random() * 1.4 + 0.4,
+      color:       COLORS[Math.floor(Math.random() * COLORS.length)],
+      alpha:       Math.random(),
+      target:      Math.random() * 0.75 + 0.1,
+      speed:       Math.random() * 0.006 + 0.002,
+      glow:        Math.random() * 7 + 3,
+    };
+  }
+
+  function buildStars() {
+    stars = Array.from({ length: 90 }, createStar);
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      if (Math.abs(s.alpha - s.target) < 0.015) {
+        s.target = Math.random() * 0.75 + 0.1;
+      }
+      s.alpha += s.alpha < s.target ? s.speed : -s.speed;
+
+      ctx.save();
+      ctx.shadowColor  = `rgba(${s.color},${s.alpha})`;
+      ctx.shadowBlur   = s.glow;
+      ctx.fillStyle    = `rgba(${s.color},${s.alpha})`;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    });
+    requestAnimationFrame(tick);
+  }
+
+  resize();
+  buildStars();
+  tick();
+
+  window.addEventListener('resize', () => { resize(); buildStars(); });
+})();
+
 // 연락처 폼 (실제 전송은 백엔드 연동 필요)
 const contactForm = document.getElementById('contactForm');
 contactForm?.addEventListener('submit', (e) => {
