@@ -2,18 +2,18 @@
    CSS 변수 & 기본 설정
    ============================================ */
 :root {
-  /* 주컬러 — Royal Blue */
-  --primary:       #2563EB;
-  --primary-dark:  #1D4ED8;
-  --primary-light: #DBEAFE;
+  /* 주컬러 — Sky Blue */
+  --primary:       #0EA5E9;
+  --primary-dark:  #0284C7;
+  --primary-light: #E0F2FE;
 
-  /* 보조컬러 — Pink */
-  --secondary:       #EC4899;
-  --secondary-light: #FCE7F3;
+  /* 보조컬러 — Lavender */
+  --secondary:       #A78BFA;
+  --secondary-light: #EDE9FE;
 
-  /* 이벤트컬러 — Yellow */
-  --accent:       #EAB308;
-  --accent-light: #FEF9C3;
+  /* 이벤트컬러 — Pink */
+  --accent:       #FB7185;
+  --accent-light: #FFE4E6;
 
   /* 배경 & 서피스 */
   --bg:      #ffffff;
@@ -27,7 +27,7 @@
   /* 기타 UI */
   --border:       #e2e8f0;
   --shadow:       0 4px 24px rgba(0, 0, 0, 0.08);
-  --shadow-hover: 0 8px 32px rgba(37, 99, 235, 0.18);
+  --shadow-hover: 0 8px 32px rgba(14, 165, 233, 0.2);
   --radius:       12px;
   --nav-height:   68px;
   --transition:   0.25s ease;
@@ -35,15 +35,15 @@
 
 /* ── 다크모드 ───────────────────────────────── */
 [data-theme="dark"] {
-  --primary:       #60A5FA;
-  --primary-dark:  #93C5FD;
-  --primary-light: #1e3a5f;
+  --primary:       #38BDF8;
+  --primary-dark:  #7DD3FC;
+  --primary-light: #0c2d3e;
 
-  --secondary:       #F472B6;
-  --secondary-light: #4a1942;
+  --secondary:       #C4B5FD;
+  --secondary-light: #2e1f4a;
 
-  --accent:       #FDE047;
-  --accent-light: #3d3200;
+  --accent:       #FDA4AF;
+  --accent-light: #4a1020;
 
   --bg:      #0f172a;
   --bg-alt:  #1e293b;
@@ -54,7 +54,7 @@
 
   --border:       #334155;
   --shadow:       0 4px 24px rgba(0, 0, 0, 0.45);
-  --shadow-hover: 0 8px 32px rgba(96, 165, 250, 0.22);
+  --shadow-hover: 0 8px 32px rgba(56, 189, 248, 0.25);
 }
 
 *, *::before, *::after {
@@ -197,7 +197,7 @@ ul {
   justify-content: center;
   text-align: center;
   padding: calc(var(--nav-height) + 24px) 24px 100px;
-  background: linear-gradient(-45deg, #eff6ff, #fce7f3, #fefce8, #dbeafe);
+  background: linear-gradient(-45deg, #e0f2fe, #ede9fe, #fce7f3, #dbeafe);
   background-size: 300% 300%;
   animation: gradientShift 12s ease infinite;
   position: relative;
@@ -986,7 +986,7 @@ footer {
 
 /* ── 다크모드 전역 추가 오버라이드 ───────────── */
 [data-theme="dark"] #hero {
-  background: linear-gradient(-45deg, #0f172a, #1e1b4b, #3b0f5e, #0f2a47);
+  background: linear-gradient(-45deg, #0c1a2e, #1e1b4b, #2d1040, #071e2e);
   background-size: 300% 300%;
   animation: gradientShift 12s ease infinite;
 }
