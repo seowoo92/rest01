@@ -61,61 +61,78 @@ fadeTargets.forEach(el => observer.observe(el));
 // 히어로 즉시 표시
 document.querySelector('.hero-content')?.classList.add('visible');
 
-// ── 별 반짝임 효과 ──────────────────────────────
-(function initStars() {
+// ── 수채화 그라디언트 오브 효과 ─────────────────
+(function initOrbs() {
   const canvas = document.getElementById('starCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  const COLORS = ['255,255,255', '196,181,253', '147,197,253', '165,243,252', '253,216,253'];
-  let stars = [];
+
+  const PALETTE = [
+    ['167,139,250', '109,40,217'],   // 보라
+    ['96,165,250',  '29,78,216'],    // 파랑
+    ['94,234,212',  '15,118,110'],   // 민트
+    ['249,168,212', '190,24,93'],    // 핑크
+    ['196,181,253', '124,58,237'],   // 라벤더
+    ['147,197,253', '37,99,235'],    // 하늘
+  ];
+
+  let orbs = [];
 
   function resize() {
     canvas.width  = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
   }
 
-  function createStar() {
+  function createOrb() {
+    const c = PALETTE[Math.floor(Math.random() * PALETTE.length)];
     return {
-      x:           Math.random() * canvas.width,
-      y:           Math.random() * canvas.height,
-      radius:      Math.random() * 1.4 + 0.4,
-      color:       COLORS[Math.floor(Math.random() * COLORS.length)],
-      alpha:       Math.random(),
-      target:      Math.random() * 0.75 + 0.1,
-      speed:       Math.random() * 0.006 + 0.002,
-      glow:        Math.random() * 7 + 3,
+      x:      Math.random() * canvas.width,
+      y:      Math.random() * canvas.height,
+      r:      Math.random() * 110 + 60,
+      vx:     (Math.random() - 0.5) * 0.25,
+      vy:     (Math.random() - 0.5) * 0.25,
+      c0:     c[0],
+      c1:     c[1],
+      alpha:  Math.random() * 0.13 + 0.07,
+      phase:  Math.random() * Math.PI * 2,
+      pSpeed: Math.random() * 0.004 + 0.002,
     };
   }
 
-  function buildStars() {
-    stars = Array.from({ length: 90 }, createStar);
+  function buildOrbs() {
+    orbs = Array.from({ length: 11 }, createOrb);
   }
 
   function tick() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    stars.forEach(s => {
-      if (Math.abs(s.alpha - s.target) < 0.015) {
-        s.target = Math.random() * 0.75 + 0.1;
-      }
-      s.alpha += s.alpha < s.target ? s.speed : -s.speed;
+    orbs.forEach(o => {
+      o.phase += o.pSpeed;
+      o.x += o.vx + Math.sin(o.phase) * 0.35;
+      o.y += o.vy + Math.cos(o.phase * 0.8) * 0.25;
 
-      ctx.save();
-      ctx.shadowColor  = `rgba(${s.color},${s.alpha})`;
-      ctx.shadowBlur   = s.glow;
-      ctx.fillStyle    = `rgba(${s.color},${s.alpha})`;
+      if (o.x < -o.r) o.x = canvas.width  + o.r;
+      if (o.x > canvas.width  + o.r) o.x = -o.r;
+      if (o.y < -o.r) o.y = canvas.height + o.r;
+      if (o.y > canvas.height + o.r) o.y = -o.r;
+
+      const g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
+      g.addColorStop(0,   `rgba(${o.c0},${o.alpha})`);
+      g.addColorStop(0.5, `rgba(${o.c1},${o.alpha * 0.5})`);
+      g.addColorStop(1,   `rgba(${o.c1},0)`);
+
       ctx.beginPath();
-      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
+      ctx.fillStyle = g;
       ctx.fill();
-      ctx.restore();
     });
     requestAnimationFrame(tick);
   }
 
   resize();
-  buildStars();
+  buildOrbs();
   tick();
 
-  window.addEventListener('resize', () => { resize(); buildStars(); });
+  window.addEventListener('resize', () => { resize(); buildOrbs(); });
 })();
 
 // 연락처 폼 (실제 전송은 백엔드 연동 필요)
