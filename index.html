@@ -21,7 +21,8 @@
         <li><a href="#skills">스킬</a></li>
         <li><a href="#experience">경력</a></li>
         <li><a href="#education">학력</a></li>
-        <li><a href="#projects">프로젝트</a></li>
+        <li><a href="#awards">수상</a></li>
+        <li><a href="#certificates">자격증</a></li>
         <li><a href="#contact">연락처</a></li>
       </ul>
       <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기">
@@ -199,66 +200,48 @@
     </div>
   </section>
 
-  <!-- 프로젝트 섹션 -->
-  <section id="projects" class="section">
+  <!-- 수상 섹션 -->
+  <section id="awards" class="section">
     <div class="container">
-      <h2 class="section-title">프로젝트</h2>
-      <div class="projects-grid">
+      <h2 class="section-title">수상</h2>
+      <div class="timeline">
 
-        <div class="project-card">
-          <div class="project-img">
-            <img src="images/project1.jpg" alt="프로젝트 1" onerror="this.parentElement.classList.add('no-img')" />
-            <div class="project-overlay">
-              <a href="#" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> 보기</a>
-              <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3>제5회 K-Digital Training 해커톤 'Digital For All'</h3>
+              <span class="timeline-date">최우수상</span>
             </div>
-          </div>
-          <div class="project-body">
-            <h3>프로젝트 이름 1</h3>
-            <p>프로젝트에 대한 간략한 설명을 여기에 작성해주세요. 어떤 문제를 해결했는지, 주요 기능은 무엇인지 기술해주세요.</p>
-            <div class="project-tags">
-              <span class="tag tag-sm">React</span>
-              <span class="tag tag-sm">Node.js</span>
-              <span class="tag tag-sm">MySQL</span>
-            </div>
+            <p class="timeline-sub">고용노동부 장관상</p>
           </div>
         </div>
 
-        <div class="project-card">
-          <div class="project-img">
-            <img src="images/project2.jpg" alt="프로젝트 2" onerror="this.parentElement.classList.add('no-img')" />
-            <div class="project-overlay">
-              <a href="#" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> 보기</a>
-              <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-          </div>
-          <div class="project-body">
-            <h3>프로젝트 이름 2</h3>
-            <p>프로젝트에 대한 간략한 설명을 여기에 작성해주세요.</p>
-            <div class="project-tags">
-              <span class="tag tag-sm">Python</span>
-              <span class="tag tag-sm">Django</span>
-              <span class="tag tag-sm">Docker</span>
-            </div>
-          </div>
-        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="project-card">
-          <div class="project-img no-img">
-            <div class="project-overlay">
-              <a href="#" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> 보기</a>
-              <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-          </div>
-          <div class="project-body">
-            <h3>프로젝트 이름 3</h3>
-            <p>프로젝트에 대한 간략한 설명을 여기에 작성해주세요.</p>
-            <div class="project-tags">
-              <span class="tag tag-sm">Vue.js</span>
-              <span class="tag tag-sm">Spring</span>
-              <span class="tag tag-sm">AWS</span>
-            </div>
-          </div>
+  <!-- 자격증 섹션 -->
+  <section id="certificates" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">자격증</h2>
+      <div class="cert-grid">
+
+        <div class="cert-card">
+          <i class="fas fa-network-wired"></i>
+          <span>네트워크 관리사 2급</span>
+        </div>
+        <div class="cert-card">
+          <i class="fab fa-linux"></i>
+          <span>리눅스마스터 2급</span>
+        </div>
+        <div class="cert-card">
+          <i class="fas fa-keyboard"></i>
+          <span>컴퓨터활용능력 2급</span>
+        </div>
+        <div class="cert-card">
+          <i class="fas fa-car"></i>
+          <span>자동차 운전면허 2종 보통</span>
         </div>
 
       </div>
