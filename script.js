@@ -1,3 +1,30 @@
+// ── 다크모드 토글 ────────────────────────────
+(function initTheme() {
+  const html   = document.documentElement;
+  const btn    = document.getElementById('themeToggle');
+  const stored = localStorage.getItem('theme');
+  const system = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function apply(dark) {
+    html.dataset.theme = dark ? 'dark' : 'light';
+    if (btn) btn.innerHTML = dark
+      ? '<i class="fas fa-sun"></i>'
+      : '<i class="fas fa-moon"></i>';
+  }
+
+  apply(stored ? stored === 'dark' : system.matches);
+
+  btn?.addEventListener('click', () => {
+    const isDark = html.dataset.theme !== 'dark';
+    apply(isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+
+  system.addEventListener('change', e => {
+    if (!localStorage.getItem('theme')) apply(e.matches);
+  });
+})();
+
 // 네비게이션 스크롤 효과
 const navbar = document.getElementById('navbar');
 const navToggle = document.getElementById('navToggle');
@@ -67,14 +94,25 @@ document.querySelector('.hero-content')?.classList.add('visible');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  const PALETTE = [
-    ['167,139,250', '109,40,217'],   // 보라
-    ['96,165,250',  '29,78,216'],    // 파랑
-    ['94,234,212',  '15,118,110'],   // 민트
-    ['249,168,212', '190,24,93'],    // 핑크
-    ['196,181,253', '124,58,237'],   // 라벤더
-    ['147,197,253', '37,99,235'],    // 하늘
+  const PALETTE_LIGHT = [
+    ['37,99,235',   '29,78,216'],
+    ['236,72,153',  '190,24,93'],
+    ['234,179,8',   '161,98,7'],
+    ['96,165,250',  '59,130,246'],
+    ['249,168,212', '244,114,182'],
+    ['253,230,138', '251,191,36'],
   ];
+  const PALETTE_DARK = [
+    ['96,165,250',  '59,130,246'],
+    ['244,114,182', '236,72,153'],
+    ['253,224,71',  '234,179,8'],
+    ['147,197,253', '96,165,250'],
+    ['249,168,212', '244,114,182'],
+    ['254,240,138', '253,224,71'],
+  ];
+  function getPalette() {
+    return document.documentElement.dataset.theme === 'dark' ? PALETTE_DARK : PALETTE_LIGHT;
+  }
 
   let orbs = [];
 
@@ -84,7 +122,8 @@ document.querySelector('.hero-content')?.classList.add('visible');
   }
 
   function createOrb() {
-    const c = PALETTE[Math.floor(Math.random() * PALETTE.length)];
+    const pal = getPalette();
+    const c = pal[Math.floor(Math.random() * pal.length)];
     return {
       x:      Math.random() * canvas.width,
       y:      Math.random() * canvas.height,

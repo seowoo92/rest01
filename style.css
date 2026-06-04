@@ -2,20 +2,59 @@
    CSS 변수 & 기본 설정
    ============================================ */
 :root {
-  --primary: #4f46e5;
-  --primary-dark: #4338ca;
-  --primary-light: #e0e7ff;
-  --secondary: #06b6d4;
-  --text: #1e293b;
+  /* 주컬러 — Royal Blue */
+  --primary:       #2563EB;
+  --primary-dark:  #1D4ED8;
+  --primary-light: #DBEAFE;
+
+  /* 보조컬러 — Pink */
+  --secondary:       #EC4899;
+  --secondary-light: #FCE7F3;
+
+  /* 이벤트컬러 — Yellow */
+  --accent:       #EAB308;
+  --accent-light: #FEF9C3;
+
+  /* 배경 & 서피스 */
+  --bg:      #ffffff;
+  --bg-alt:  #f8fafc;
+  --surface: #ffffff;
+
+  /* 텍스트 */
+  --text:       #1e293b;
   --text-muted: #64748b;
-  --bg: #ffffff;
-  --bg-alt: #f8fafc;
-  --border: #e2e8f0;
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-  --shadow-hover: 0 8px 32px rgba(79, 70, 229, 0.18);
-  --radius: 12px;
-  --nav-height: 68px;
-  --transition: 0.25s ease;
+
+  /* 기타 UI */
+  --border:       #e2e8f0;
+  --shadow:       0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 8px 32px rgba(37, 99, 235, 0.18);
+  --radius:       12px;
+  --nav-height:   68px;
+  --transition:   0.25s ease;
+}
+
+/* ── 다크모드 ───────────────────────────────── */
+[data-theme="dark"] {
+  --primary:       #60A5FA;
+  --primary-dark:  #93C5FD;
+  --primary-light: #1e3a5f;
+
+  --secondary:       #F472B6;
+  --secondary-light: #4a1942;
+
+  --accent:       #FDE047;
+  --accent-light: #3d3200;
+
+  --bg:      #0f172a;
+  --bg-alt:  #1e293b;
+  --surface: #1e293b;
+
+  --text:       #f1f5f9;
+  --text-muted: #94a3b8;
+
+  --border:       #334155;
+  --shadow:       0 4px 24px rgba(0, 0, 0, 0.45);
+  --shadow-hover: 0 8px 32px rgba(96, 165, 250, 0.22);
 }
 
 *, *::before, *::after {
@@ -64,7 +103,11 @@ ul {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
-  transition: border-color var(--transition), box-shadow var(--transition);
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+[data-theme="dark"] #navbar {
+  background: rgba(15, 23, 42, 0.88);
 }
 
 #navbar.scrolled {
@@ -154,7 +197,7 @@ ul {
   justify-content: center;
   text-align: center;
   padding: calc(var(--nav-height) + 24px) 24px 100px;
-  background: linear-gradient(-45deg, #ede9fe, #dbeafe, #cffafe, #e0e7ff);
+  background: linear-gradient(-45deg, #eff6ff, #fce7f3, #fefce8, #dbeafe);
   background-size: 300% 300%;
   animation: gradientShift 12s ease infinite;
   position: relative;
@@ -352,6 +395,11 @@ ul {
   width: 100%;
   height: 50px;
 }
+.wave-to-alt     { background: var(--bg); }
+.wave-to-default { background: var(--bg-alt); }
+.wave-to-alt     svg path { fill: var(--bg-alt); }
+.wave-to-default svg path { fill: var(--bg); }
+.hero-wave       svg path { fill: var(--bg); }
 
 /* ============================================
    공통 섹션
@@ -452,7 +500,7 @@ ul {
 }
 
 .skill-category {
-  background: white;
+  background: var(--surface);
   border-radius: var(--radius);
   padding: 28px;
   box-shadow: var(--shadow);
@@ -574,7 +622,7 @@ ul {
 }
 
 .timeline-content {
-  background: var(--bg);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 24px 28px;
@@ -583,7 +631,7 @@ ul {
 }
 
 .section-alt .timeline-content {
-  background: white;
+  background: var(--bg);
 }
 
 .timeline-item:hover .timeline-content {
@@ -641,7 +689,7 @@ ul {
 }
 
 .project-card {
-  background: white;
+  background: var(--surface);
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -754,7 +802,7 @@ ul {
 }
 
 .cert-card {
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 28px 24px;
@@ -875,7 +923,7 @@ ul {
   font-family: inherit;
   font-size: 0.95rem;
   color: var(--text);
-  background: white;
+  background: var(--surface);
   transition: border-color var(--transition), box-shadow var(--transition);
   resize: vertical;
 }
@@ -910,6 +958,53 @@ footer {
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ============================================
+   테마 토글 버튼
+   ============================================ */
+.theme-toggle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+  flex-shrink: 0;
+}
+.theme-toggle:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: rotate(20deg);
+}
+
+/* ── 다크모드 전역 추가 오버라이드 ───────────── */
+[data-theme="dark"] #hero {
+  background: linear-gradient(-45deg, #0f172a, #1e1b4b, #3b0f5e, #0f2a47);
+  background-size: 300% 300%;
+  animation: gradientShift 12s ease infinite;
+}
+[data-theme="dark"] .hero-photo-wrap {
+  border-color: #334155;
+  box-shadow: 0 8px 32px rgba(96, 165, 250, 0.25);
+}
+[data-theme="dark"] .hero-social a {
+  background: var(--bg-alt);
+  color: var(--text-muted);
+}
+[data-theme="dark"] .nav-links {
+  background: var(--bg);
+  border-color: var(--border);
+}
+[data-theme="dark"] .tag {
+  background: var(--primary-light);
+  color: var(--primary);
 }
 
 /* ============================================
